@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rate Book</title>
+</head>
+<body>
+    <form action="{{ book_title }}" method="post">
+        {% csrf_token %}
+        <label for="book_rating">Book rating:</label>
+        <select id="book_rating" name="rating">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select>
+        <input type="submit" value="ADD Rating">
+    </form>
+</body>
+</html>

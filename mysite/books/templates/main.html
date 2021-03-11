@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <label for="book_title">Book title:</label>
+        <input id="book_title" type="text" name="book_title"><br>
+        <label for="book_author">Book author:</label>
+        <input id="book_author" type="text" name="book_author"><br>
+        <input type="submit" value="ADD">
+    </form>
+    <br>
+    <form action="/" method="get">
+        {% csrf_token %}
+        <label for="search">Search:</label>
+        <input id="search" type="text" name="search"><br>
+        <input type="submit" value="SEARCH">
+    </form>
+    <br>
+    <form action="/" method="get">
+        {% csrf_token %}
+        <input type="submit" name="order_asc" value="order_asc">
+        <input type="submit" name="order_desc" value="order_desc">
+    </form>
+    <br>
+    {% if results %}
+        {% for book in results %}
+            <a href="book/{{ book.book_title }}" methods="GET">
+            {{ book.book_title }}: {{ book.book_author }}
+            </a>
+            ocena: {{ book.book_rating|floatformat:2  }}
+            liczba ocen: {{ book.ratings_amount }}
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>No records to display</p>
+    {% endif %}
+</body>
+</html>
