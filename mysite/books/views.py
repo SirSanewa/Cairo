@@ -9,6 +9,12 @@ from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
 def book(request, book_title):
+    """
+    Display rating screen for the book and modify database book rating and rating_amounts
+    :param request:
+    :param book_title:
+    :return:
+    """
     if request.method == 'POST':
         str_rating = request.POST.get("rating", "")
         rating = int(str_rating)
@@ -23,6 +29,11 @@ def book(request, book_title):
 
 @csrf_protect
 def index(request):
+    """
+    Main view to display books from database. Allows user to create new book and order result asc and desc.
+    :param request:
+    :return:
+    """
     context = {}
     if request.method == 'POST':
         form = NameForm(request.POST)
