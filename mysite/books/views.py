@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -29,7 +30,10 @@ def index(request):
             title = form.cleaned_data['book_title']
             author = form.cleaned_data["book_author"]
             new_book = Book(book_author=author, book_title=title)
-            new_book.save()
+            try:
+                new_book.save()
+            except IntegrityError:
+                context["error"] = "Podany tytuł istnieje już w bazie"
 
     if search_phrase := request.GET.get("search", ""):
         searched_result = Book.objects.filter(Q(book_title__contains=search_phrase) | Q(book_author__contains=search_phrase))

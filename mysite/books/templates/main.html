@@ -13,7 +13,9 @@
         <input id="book_author" type="text" name="book_author"><br>
         <input type="submit" value="ADD">
     </form>
-    <br>
+    {% if error %}
+       <p style="color: red;">{{ error }}</p>
+    {% endif %}
     <form action="/" method="get">
         {% csrf_token %}
         <label for="search">Search:</label>
